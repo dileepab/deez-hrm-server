@@ -1,0 +1,34 @@
+version: "3"
+services:
+  deez-app:
+    container_name: server-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://server:123@postgres:5432/server
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - "3000:3000"
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: server
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: server
+    volumes:
+      - db-data:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  db-data:
