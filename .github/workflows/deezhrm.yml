@@ -20,7 +20,9 @@ jobs:
           node-version: ${{ matrix.NODE_VERSION }}
       - name: npm install, build, and test
         run: |
+          nvm use 8.17.0
           npm install
           cd client
+          nvm use 15.3.0
           npm install
           npm run build
