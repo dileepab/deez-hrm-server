@@ -20,8 +20,6 @@ jobs:
           node-version: ${{ matrix.NODE_VERSION }}
       - name: npm install, build, and test
         run: |
-          # Build and test the project, then
-          # deploy to Azure Web App.
           npm install
           cd client
           npm install
